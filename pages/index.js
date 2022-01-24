@@ -43,7 +43,7 @@ function Titulo(props){
                 ${Tag} {
                     color: ${appConfig.theme.colors.neutrals["600"]};
                     font-size: 24px;
-                    font-weight: 600;
+                    font-weight: 900;
                 }
             `}</style>
         </>
@@ -76,7 +76,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+          backgroundImage: 'url(../assets/fotoFundo.jpg)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
