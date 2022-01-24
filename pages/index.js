@@ -41,9 +41,9 @@ function Titulo(props){
             <Tag>{props.children}</Tag>
             <style jsx>{`
                 ${Tag} {
-                    color: ${appConfig.theme.colors.neutrals["600"]};
+                    color: ${appConfig.theme.colors.neutrals["000"]};
                     font-size: 24px;
-                    font-weight: 900;
+                    font-weight: 600;
                 }
             `}</style>
         </>
@@ -76,7 +76,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage: 'url(../assets/fotoFundo.jpg)',
+          backgroundImage: 'url(https://images.pexels.com/photos/414144/pexels-photo-414144.jpeg?cs=srgb&dl=pexels-pixabay-414144.jpg&fm=jpg)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
