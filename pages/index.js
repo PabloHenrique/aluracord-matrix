@@ -111,7 +111,7 @@ export default function PaginaInicial() {
                 color: appConfig.theme.colors.neutrals[300]
                 }}
             >
-              Discord - Matrix {username}
+              Discord - Matrix ({username})
             </Text>
 
             <TextField
