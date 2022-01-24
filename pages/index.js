@@ -76,7 +76,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary["050"],
-          backgroundImage: 'url(https://t.ctcdn.com.br/O3yCeqKE3O36DBuiEyap4WxDgEk=/512x288/smart/i509997.jpeg)',
+          backgroundImage: 'url(https://images.alphacoders.com/116/thumbbig-1169181.webp)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
