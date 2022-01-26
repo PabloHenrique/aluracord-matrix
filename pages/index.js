@@ -1,36 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+import {useRouter} from 'next/router';
 import appConfig from '../config.json';
-
-function GlobalStyle() {
-    return (
-      <style global jsx>{`
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-          font-family: 'Open Sans', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-  }
   
-
 function Titulo(props){
     //O CSS é aplicado diferentemente de cada Componente React
     //Colocar os valores, propriedades entre {}
@@ -53,25 +25,26 @@ function Titulo(props){
 
 //Componente React
 /*
-function HomePage(){
-    //Usando Next.js [Função JS - Retornando HTML]
-    return(
-    <div>
-        <GlobalStyle />
-        <Titulo tag="h2">Boas vindas de volta!</Titulo>
-        <h2>Discord - Alura Matrix</h2>
-    </div>
-    ) 
-}
-export default HomePage
+  function HomePage(){
+      //Usando Next.js [Função JS - Retornando HTML]
+      return(
+      <div>
+          <GlobalStyle />
+          <Titulo tag="h2">Boas vindas de volta!</Titulo>
+          <h2>Discord - Alura Matrix</h2>
+      </div>
+      ) 
+  }
+  export default HomePage
 */
 
 export default function PaginaInicial() {
-  const username = 'PabloHenrique';
+  //const username = 'PabloHenrique';
+  const [username, setUsername] = React.useState('PabloHenrique');
+  const roteamento = useRouter();
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -98,6 +71,13 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={function (infosDoEvento){
+              infosDoEvento.preventDefault();
+              console.log('Alguém enviou o form')
+              //Trocar de página
+              //window.location.href = '/chat';
+              roteamento.push('/chat');
+            }}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -113,8 +93,28 @@ export default function PaginaInicial() {
             >
               Discord - Matrix ({username})
             </Text>
+            
+            {/*
+            <input
+              type="text"
+              value= {username} //Vincular a uma variável
+              onChange={function (event){//Funcção para capturar a digitação
+                  console.log('Digitou', event.target.value);
+                  //Trocar o valor (React) para atualizar a página
+                  const valor = event.target.value;
+                  setUsername(valor);
+              }}
+            />
+            */}
 
             <TextField
+              value= {username}
+              onChange={function (event){//Funcção para capturar a digitação
+                console.log('Digitou', event.target.value);
+                //Trocar o valor (React) para atualizar a página
+                const valor = event.target.value;
+                setUsername(valor);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -125,6 +125,7 @@ export default function PaginaInicial() {
                 },
               }}
             />
+
             <Button
               type='submit'
               label='Entrar'
@@ -161,6 +162,7 @@ export default function PaginaInicial() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
+              //Buscar img do git
               src={`https://github.com/${username}.png`}
             />
             <Text
