@@ -49,7 +49,7 @@ export default function PaginaInicial() {
         styleSheet={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           backgroundColor: appConfig.theme.colors.primary["050"],
-          backgroundImage: 'url(https://initiate.alphacoders.com/images/116/cropped-1920-1080-1169181.jpg?5903)',
+          backgroundImage: 'url(https://initiate.alphacoders.com/images/116/cropped-1920-1080-1169181.jpg?3136)',
           backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
         }}
       >
