@@ -1,25 +1,36 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
+import react from 'react';
 import React from 'react';
 import appConfig from '../config.json';
 
 export default function ChatPage() {
-    const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+  const [mensagem, setMensagem] = React.useState('');
+  const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+  
+  /*
     // Usuário
+    - Usuário digita no campo textarea
+    - Aperta enter para enviar
+    - Tem que adicionar o texto na listagem
     
-    /*
-    - Escrever mensagem
-    - Enviar
-    - Aparecer o texto: enviar na listagem
-     */
-
     // Dev
-    
-    /*
-    - Campo TextArea
-    - OnChange (ler a mensagem e subst a var)
-    - Lista de mensagem
+    - [X] Campo criado
+    - [X] Vamos usar o onChange usa o useState (ter if pra caso seja enter pra limpar a variavel)
+    - [X] Lista de mensagens 
     */
+
+    function handleNovaMensagem(novaMensagem) {
+      const mensagem = {
+        id: listaDeMensagens.length + 1,
+        de: 'PabloHenrique',
+        texto: novaMensagem,
+      }
+      setListaDeMensagens([
+        mensagem, ...listaDeMensagens
+      ])
+      setMensagem('')
+    }
+
     return (
         <Box
             styleSheet={{
@@ -27,7 +38,7 @@ export default function ChatPage() {
                 backgroundColor: appConfig.theme.colors.neutrals[500],
                 backgroundImage: `url(https://initiate.alphacoders.com/images/116/cropped-1920-1080-1169181.jpg?3136)`,
                 backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
-                color: appConfig.theme.colors.neutrals['100']
+                color: appConfig.theme.colors.neutrals['000']
             }}
         >
             <Box
@@ -56,17 +67,10 @@ export default function ChatPage() {
                         borderRadius: '5px',
                         padding: '16px',
                     }}
-                >   
-                    <MessageList />
-                    <MessageList mensagem={listaDeMensagens} />
-                    {listaDeMensagens.map((mensagemAtual) => {
-                        console.log(mensagemAtual);
-                        return (
-                            <li>
-
-                            </li>
-                        )
-                    })}
+                >
+                 
+                    <MessageList mensagens={listaDeMensagens} 
+                    />
                     <Box
                         as="form"
                         styleSheet={{
@@ -77,19 +81,15 @@ export default function ChatPage() {
                         <TextField
                             value={mensagem}
                             onChange={(event) => {
-                                //Chamada de função
-                                const valor = event.target.value;
-                                setMensagem(valor);
+                              const valor = event.target.value;
+                              setMensagem(valor)
                             }}
+
                             onKeyPress={(event) => {
-                                if(event.key === 'Enter'){
-                                    console.log(event);
-                                    setListaDeMensagens([
-                                        ...listaDeMensagens,
-                                        mensagem
-                                    ]);
-                                    setMensagem('');
-                                }
+                              if (event.key === 'Enter') {
+                                event.preventDefault('')
+                                handleNovaMensagem(mensagem)
+                              }
                             }}
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
@@ -130,21 +130,23 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
+    console.log(props.listaDeMensagens);
     return (
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'scroll',
+                overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column-reverse',
                 flex: 1,
                 color: appConfig.theme.colors.neutrals["000"],
-                marginBottom: '16px',
+                marginBottom: '16px', 
+
             }}
         >
-
-            <Text
+            {props.mensagens.map((mensagem) => {
+                return (
+                  <Text
                 key={mensagem.id}
                 tag="li"
                 styleSheet={{
@@ -169,7 +171,7 @@ function MessageList(props) {
                             display: 'inline-block',
                             marginRight: '8px',
                         }}
-                        src={`https://github.com/vanessametonini.png`}
+                        src={`https://github.com/pablohenrique.png`}
                     />
                     <Text tag="strong">
                         {mensagem.de}
@@ -187,6 +189,8 @@ function MessageList(props) {
                 </Box>
                 {mensagem.texto}
             </Text>
+                )
+              })}
         </Box>
     )
 }
